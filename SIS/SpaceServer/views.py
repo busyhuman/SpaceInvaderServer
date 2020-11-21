@@ -5,6 +5,7 @@ from rest_framework import viewsets, generics
 from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.http import HttpResponse
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -29,4 +30,4 @@ class wow(APIView):
     def get(self, request):
         print(request.user)
         print(request.auth)
-        return Response(request.user)
+        return HttpResponse(request.user)
