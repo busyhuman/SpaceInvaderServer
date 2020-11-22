@@ -29,8 +29,6 @@ class RecordViewSet(APIView):
       #  filter_fields = ('RecordNum', 'user', 'Date', 'Score', 'Stage', )
 
     def post(self, request):
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        print(request.user)
         queryset = Record.objects.create(user=get_object_or_404(User, pk=request.user), Stage=request.data['Stage'], Score=request.data['Score'])
 
         return Response("Being Added !!")
