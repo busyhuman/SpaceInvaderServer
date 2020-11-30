@@ -6,12 +6,12 @@ from .views import *
 
 router = routers.DefaultRouter()
 router.register('users', UserViewSet)
-router.register('records', RecordViewSet)
-router.register('logined', LoginedViewSet)
 
 urlpatterns = [
      path('', include(router.urls)),
-     path('wow/', views.wow.as_view()),
+     path('auth/', views.wow.as_view()),
+     path('records/', views.RecordListView.as_view()),
+     path('records/<int:rid>/', views.RecordDetailView.as_view()),
      url(r'^rest-auth/', include('rest_auth.urls')), # Login, Logout 관련 기능
      url(r'^rest-auth/registration/', include('rest_auth.registration.urls')) # SignUp 관련 기능
 ]
