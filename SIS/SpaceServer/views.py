@@ -26,24 +26,24 @@ class RecordListView(APIView):
 
         mRecordNum = request.GET.get('RecordNum')
         mScore = request.GET.get('Score')
-        mScore = request.GET.get('Stage')
+        mStage = request.GET.get('Stage')
         muser = request.GET.get('user')
         mDate = request.GET.get('Date')
 
         if request.GET.get('RecordNum') is not None:
-            queryset = queryset.filter(RecordNum = request.GET.get('RecordNum'))
+            queryset = queryset.filter(RecordNum = mRecordNum)
 
         if request.GET.get('Score') is not None:
-            queryset = queryset.filter(Score = request.GET.get('Score'))
+            queryset = queryset.filter(Score = mScore)
 
         if request.GET.get('Stage') is not None:
-            queryset = queryset.filter(Stage = request.GET.get('Stage'))
+            queryset = queryset.filter(Stage = mStage)
 
         if request.GET.get('user') is not None:
-            queryset = queryset.filter(user = request.GET.get('user'))
+            queryset = queryset.filter(user = muser)
 
         if request.GET.get('Date') is not None:
-            queryset = queryset.filter(Date = request.GET.get('Date'))
+            queryset = queryset.filter(Date = mDate)
 
         queryset = queryset.order_by('-Score', 'RecordNum')[:ListCount]
 
@@ -60,7 +60,7 @@ class RecordListView(APIView):
 
 class RecordDetailView(APIView):
     def get(self, request, rid):
-        queryset = Record.objects.filter(RecordNum = rid).order_by('-Score', 'RecordNum')
+        queryset = Record.objects.filter(RecordNum = rid)
         serializer = RecordSerializer(queryset, many=True)
         return Response(serializer.data);
 
